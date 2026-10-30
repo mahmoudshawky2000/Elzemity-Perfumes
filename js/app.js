@@ -1,4 +1,4 @@
-/* Oriantal Perfumes storefront - connected to the Express/MySQL backend.
+/* Elzemity storefront - connected to the Express/MySQL backend.
    The browser NEVER decides prices, stock, shipping or discounts: it only displays what the API returns.
    Socket.IO is a notification channel; after any event (and after every reconnect) data is re-fetched from the REST API.
 
@@ -20,7 +20,7 @@ const DEFAULT_CATEGORIES = ["Men", "Women", "Unisex"];
 const state = {
   page: "home", slug: "home", category: "All", query: "", sort: "featured", searchNav: false,
   all: [], loaded: false, loadError: false, // every active product (the category pages filter this list in the browser)
-  cart: loadCart(), wishlist: new Set(), config: { storeName: "ORIANTAL PERFUMES", categories: [], shippingZones: [] }, configLoaded: false,
+  cart: loadCart(), wishlist: new Set(), config: { storeName: "ELZEMITY", categories: [], shippingZones: [] }, configLoaded: false,
   user: null, csrf: null, quote: null, quoteSeq: 0, idem: null, submitting: false, couponApplied: "", currentOrder: null,
 };
 let toastTimer, productsAbort, refetchTimer, socket;
@@ -345,7 +345,7 @@ async function submitReceipt(form) {
 
 /* ------------------------------ account ------------------------------ */
 const firstName = () => state.user.name.split(" ")[0];
-function updateAccountLabel() { const txt = state.user ? firstName() : t("nav.account"); $("#accountToggle").textContent = txt; $("#accountToggleMobile").textContent = txt; }
+function updateAccountLabel() { const txt = state.user ? firstName() : t("nav.account"); $("#accountToggle").setAttribute("aria-label", txt); $("#accountToggle").title = txt; $("#accountToggleMobile").textContent = txt; }
 async function loadMe() { try { const d = await api("/auth/me"); state.user = d.user; state.csrf = d.csrfToken || null; } catch { /* offline: stay guest */ } updateAccountLabel(); }
 function openAccount(tab = "login") { renderAccount(tab); closeMobileMenu(); if (!$("#accountDialog").open) $("#accountDialog").showModal(); }
 function renderAccount(tab = "login") {
@@ -360,7 +360,8 @@ function renderAccount(tab = "login") {
   const local = savedOrders();
   c.innerHTML = `<p class="eyebrow">${esc(t("acct.eyebrow"))}</p><h2 id="accountTitle">${t("acct.welcome")}</h2>
     <div class="tabs" role="tablist"><button role="tab" data-tab="login" aria-selected="${tab === "login"}">${esc(t("acct.login"))}</button><button role="tab" data-tab="register" aria-selected="${tab === "register"}">${esc(t("acct.register"))}</button><button role="tab" data-tab="track" aria-selected="${tab === "track"}">${esc(t("acct.track"))}</button></div>
-    ${tab === "login" ? `<form id="loginForm" class="stack"><div class="form-field"><label for="liEmail">${esc(t("acct.email"))}</label><input id="liEmail" name="email" type="email" autocomplete="email" required dir="ltr"></div><div class="form-field"><label for="liPw">${esc(t("acct.password"))}</label><input id="liPw" name="password" type="password" autocomplete="current-password" required dir="ltr"></div><button class="button button-dark" type="submit">${esc(t("acct.login"))}</button><p class="form-message" id="acctMsg" role="alert"></p></form>` : ""}
+    ${tab === "login" ? `<form id="loginForm" class="stack"><div class="form-field"><label for="liEmail">${esc(t("acct.email"))}</label><input id="liEmail" name="email" type="email" autocomplete="email" required dir="ltr"></div><div class="form-field"><label for="liPw">${esc(t("acct.password"))}</label><input id="liPw" name="password" type="password" autocomplete="current-password" required dir="ltr"></div><button class="button button-dark" type="submit">${esc(t("acct.login"))}</button><button type="button" class="text-button" data-tab="forgot">${I18N.lang === "ar" ? "نسيت كلمة المرور؟" : "Forgot password?"}</button><p class="form-message" id="acctMsg" role="alert"></p></form>` : ""}
+    ${tab === "forgot" ? `<form id="forgotForm" class="stack"><p>${I18N.lang === "ar" ? "اكتب بريدك الإلكتروني وسنرسل رابطًا لتغيير كلمة المرور إذا كان الحساب موجودًا." : "Enter your email to receive a reset link if your account exists."}</p><div class="form-field"><label for="forgotEmail">${esc(t("acct.email"))}</label><input id="forgotEmail" name="email" type="email" autocomplete="email" required dir="ltr"></div><button class="button button-dark" type="submit">${I18N.lang === "ar" ? "إرسال رابط الاستعادة" : "Send reset link"}</button><button class="text-button" type="button" data-tab="login">${I18N.lang === "ar" ? "العودة لتسجيل الدخول" : "Back to login"}</button><p class="form-message" id="acctMsg" role="status"></p></form>` : ""}
     ${tab === "register" ? `<form id="registerForm" class="stack"><div class="form-field"><label for="rgName">${esc(t("acct.name"))}</label><input id="rgName" name="name" autocomplete="name" required minlength="2"></div><div class="form-field"><label for="rgEmail">${esc(t("acct.email"))}</label><input id="rgEmail" name="email" type="email" autocomplete="email" required dir="ltr"></div><div class="form-field"><label for="rgPw">${esc(t("acct.passwordNew"))}</label><input id="rgPw" name="password" type="password" autocomplete="new-password" required minlength="8" dir="ltr"></div><button class="button button-dark" type="submit">${esc(t("acct.register"))}</button><p class="form-message" id="acctMsg" role="alert"></p></form>` : ""}
     ${tab === "track" ? `${local.length ? `<div class="stack" style="margin-bottom:18px">${local.map((o) => `<button class="order-mini" data-open-order="${esc(o.number)}"><span class="ltr">${esc(o.number)}</span><span>${t("acct.view")}</span></button>`).join("")}</div>` : ""}<form id="trackForm" class="stack"><div class="form-field"><label for="trNum">${esc(t("acct.orderNo"))}</label><input id="trNum" name="number" placeholder="OP-250101-ABC123" required dir="ltr"></div><div class="form-field"><label for="trTok">${esc(t("acct.token"))}</label><input id="trTok" name="token" autocomplete="off" required dir="ltr"></div><button class="button button-dark" type="submit">${esc(t("acct.trackBtn"))}</button><p class="form-message" id="acctMsg" role="alert"></p></form>` : ""}`;
 }
@@ -418,6 +419,7 @@ document.addEventListener("keydown", (e) => { const el = e.target.closest?.("[da
 document.addEventListener("submit", (e) => {
   const f = e.target;
   if (f.id === "receiptForm") { e.preventDefault(); submitReceipt(f); }
+  if (f.id === "forgotForm") { e.preventDefault(); const msg = $("#acctMsg"); const email = new FormData(f).get("email"); msg.className = "form-message"; msg.textContent = t("wait"); api("/auth/forgot-password", { method: "POST", body: { email } }).then(() => { msg.textContent = I18N.lang === "ar" ? "إذا كان الحساب موجودًا، ستصلك رسالة الاستعادة قريبًا." : "If this account exists, a reset email will arrive shortly."; }).catch((err) => { msg.className = "form-message error"; msg.textContent = authErr(err); }); }
   if (f.id === "loginForm") { e.preventDefault(); doAuth("login", f); }
   if (f.id === "registerForm") { e.preventDefault(); doAuth("register", f); }
   if (f.id === "trackForm") { e.preventDefault(); const d = Object.fromEntries(new FormData(f)); const n = d.number.trim().toUpperCase(); const tk = d.token.trim(); rememberOrder(n, tk); $("#accountDialog").close(); showOrder(n, tk); }

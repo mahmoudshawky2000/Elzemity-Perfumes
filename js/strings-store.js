@@ -11,12 +11,12 @@
     "loading": ["Loading…", "جارٍ التحميل…"],
     "wait": ["Please wait…", "لحظة من فضلك…"],
     "announcement": ["A LITTLE LUXURY, DELIVERED TO YOUR DOOR", "لمسة من الفخامة تصل إلى باب منزلك"],
-    "meta.desc": ["Discover your next signature scent at Oriantal Perfumes. Explore refined fragrances for every mood.", "اكتشف عطرك المميز التالي مع أورينتال بيرفيومز. عطور راقية تناسب كل مزاج."],
-    "title.home": ["Oriantal Perfumes — Find Your Signature Scent", "أورينتال بيرفيومز — اعثر على عطرك المميز"],
-    "title.shop": ["All fragrances — Oriantal Perfumes", "كل العطور — أورينتال بيرفيومز"],
-    "title.cat": ["{name} — Oriantal Perfumes", "عطور {name} — أورينتال بيرفيومز"],
-    "title.about": ["Our story — Oriantal Perfumes", "قصتنا — أورينتال بيرفيومز"],
-    "title.care": ["Shipping & payment — Oriantal Perfumes", "الشحن والدفع — أورينتال بيرفيومز"],
+    "meta.desc": ["Discover your next signature scent at Elzemity. Explore refined fragrances for every mood.", "اكتشف عطرك المميز التالي مع إلزيميتي. عطور راقية تناسب كل مزاج."],
+    "title.home": ["Elzemity — Find Your Signature Scent", "إلزيميتي — اعثر على عطرك المميز"],
+    "title.shop": ["All fragrances — Elzemity", "كل العطور — إلزيميتي"],
+    "title.cat": ["{name} — Elzemity", "عطور {name} — إلزيميتي"],
+    "title.about": ["Our story — Elzemity", "قصتنا — إلزيميتي"],
+    "title.care": ["Shipping & payment — Elzemity", "الشحن والدفع — إلزيميتي"],
 
     /* ---------- header / navigation ---------- */
     "nav.home": ["Home", "الرئيسية"],
@@ -30,7 +30,7 @@
     "nav.search": ["Search products", "بحث في المنتجات"],
     "nav.open": ["Open navigation", "فتح القائمة"],
     "nav.main": ["Main navigation", "القائمة الرئيسية"],
-    "nav.homeAria": ["Oriantal Perfumes home", "أورينتال بيرفيومز - الصفحة الرئيسية"],
+    "nav.homeAria": ["Elzemity home", "إلزيميتي - الصفحة الرئيسية"],
     "search.title": ["Find your fragrance", "ابحث عن عطرك"],
     "search.placeholder": ["Search by perfume or scent family…", "ابحث باسم العطر أو العائلة العطرية…"],
     "search.clear": ["Clear", "مسح"],
@@ -126,7 +126,7 @@
     "care.track": ["Track my order", "تتبّع طلبي"],
 
     /* ---------- newsletter / footer ---------- */
-    "news.eyebrow": ["A NOTE FROM ORIANTAL PERFUMES", "رسالة من أورينتال بيرفيومز"],
+    "news.eyebrow": ["A NOTE FROM ELZEMITY", "رسالة من إلزيميتي"],
     "news.title": ["Good things <em>linger.</em>", "الأشياء الجميلة <em>تبقى.</em>"],
     "news.text": ["Get updates on new arrivals and thoughtfully selected scents.", "تابع جديدنا وأحدث العطور المختارة بعناية."],
     "news.label": ["Email address", "البريد الإلكتروني"],
@@ -142,7 +142,7 @@
     "footer.shipping": ["Shipping & payment", "الشحن والدفع"],
     "footer.track": ["Track your order", "تتبّع طلبك"],
     "footer.company": ["Company", "عن المتجر"],
-    "footer.rights": ["© {year} Oriantal Perfumes. All rights reserved.", "© {year} أورينتال بيرفيومز. جميع الحقوق محفوظة."],
+    "footer.rights": ["© {year} Elzemity. All rights reserved.", "© {year} إلزيميتي. جميع الحقوق محفوظة."],
     "footer.made": ["MADE FOR YOUR SENSES", "صُنع لحواسّك"],
 
     /* ---------- cart ---------- */

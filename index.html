@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover your next signature scent at Oriantal Perfumes. Explore refined fragrances for every mood.">
-  <title>Oriantal Perfumes — Find Your Signature Scent</title>
+  <meta name="description" content="Discover your next signature scent at Elzemity. Explore refined fragrances for every mood.">
+  <title>Elzemity — Find Your Signature Scent</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,10 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/hero-fullscreen-fix.css?v=2">
+  <link rel="stylesheet" href="css/refinements.css?v=1">
 
-  <link rel="icon" type="image/svg+xml" href="img/favicon.svg"><link rel="alternate icon" type="image/png" href="img/logo.png">
+  <link rel="icon" type="image/png" href="img/elzemity-brown.png">
 
   <script src="js/i18n.js"></script>
   <script defer src="js/strings-store.js"></script>
@@ -27,7 +29,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      position: relative;
+      min-width: 42px;
+      min-height: 42px;
+      gap: 0;
       border: 0;
       background: transparent;
       color: var(--ink);
@@ -48,18 +53,27 @@
       transform: translateY(-2px);
     }
 
+    /* The quantity sits on the bag itself, not beside it. */
     .cart-trigger .cart-badge {
-      display: inline-grid;
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: grid;
       place-items: center;
-      width: 20px;
-      height: 20px;
-      margin-left: 0;
-      border-radius: 50%;
-      background: var(--ink);
+      min-width: 17px;
+      height: 17px;
+      padding: 0 3px;
+      margin: 0;
+      border: 1.5px solid #fffdfa;
+      border-radius: 999px;
+      background: #a5814a;
       color: #fff;
-      font-size: 10px;
-      line-height: 1;
+      font: 700 10px/1 'DM Sans', sans-serif;
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+      pointer-events: none;
+      transform: translate(5%, -5%);
     }
+    .cart-trigger .cart-badge:empty { display: none; }
 
     .cart-trigger:focus-visible {
       outline: 2px solid var(--gold);
@@ -68,7 +82,7 @@
 
     @media (max-width: 650px) {
       .cart-trigger {
-        gap: 5px;
+        gap: 0;
         padding: 6px;
       }
 
@@ -78,12 +92,13 @@
       }
 
       .cart-trigger .cart-badge {
-        width: 18px;
-        height: 18px;
+        min-width: 16px;
+        height: 16px;
         font-size: 9px;
       }
     }
   </style>
+  <link rel="stylesheet" href="css/elzemity-brand.css?v=2">
 </head>
 
 <body>
@@ -107,9 +122,9 @@
     <a
       class="brand"
       href="#/"
-      aria-label="Oriantal Perfumes"
+      aria-label="Elzemity"
       data-i18n-attr="aria-label:nav.homeAria"
-    ><img class="brand-logo" src="img/logo.svg" alt="Oriantal Perfumes" width="64" height="72" decoding="async"></a>
+    ><img class="brand-logo" src="img/elzemity-brown.png" alt="Elzemity" width="64" height="72" decoding="async"></a>
 
     <nav
       class="desktop-nav"
@@ -136,7 +151,7 @@
         data-i18n-attr="aria-label:nav.search"
       >⌕</button>
 
-      <button class="header-link account-link" id="accountToggle" type="button" data-i18n="nav.account">Account</button>
+      <button class="header-link account-link account-icon-button" id="accountToggle" type="button" aria-label="My account" title="My account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.5"/><path d="M4.5 20c0-4.1 3.1-6.5 7.5-6.5s7.5 2.4 7.5 6.5"/></svg></button>
 
       <!-- Updated shopping cart icon -->
       <button
@@ -178,6 +193,9 @@
     <!-- HOME -->
     <div class="page" data-page="home">
       <section class="hero">
+        <div class="hero-background" aria-hidden="true">
+          <video class="hero-video" id="heroVideo" autoplay muted playsinline preload="auto" poster="img/hero-poster.jpg" aria-hidden="true" disablepictureinpicture><source src="video/hero.mp4" type="video/mp4"><source src="video/hero.webm" type="video/webm"></video>
+        </div>
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="home.eyebrow">THE ART OF FRAGRANCE</p>
           <h1 data-i18n-html="home.title">A scent that<br><em>stays with you.</em></h1>
@@ -189,14 +207,7 @@
           </div>
         </div>
 
-        <div class="hero-visual" role="img" aria-label="Elegant perfume bottle in a warm, sculptural still life" data-i18n-attr="aria-label:home.heroAlt">
-          <video class="hero-video" id="heroVideo" autoplay muted playsinline preload="auto" poster="img/hero-poster.jpg" aria-hidden="true" disablepictureinpicture><source src="video/hero.mp4" type="video/mp4"><source src="video/hero.webm" type="video/webm"></video>
-          <div class="hero-stamp">
-            <span>ORIANTAL PERFUMES</span>
-            <small data-i18n-html="home.stamp">YOUR SIGNATURE<br>AWAITS</small>
-          </div>
-          <div class="hero-vertical" data-i18n="home.vertical">EAU DE PARFUM · DISCOVER YOUR NOTES</div>
-        </div>
+
       </section>
 
       <section class="trust-strip" aria-label="Store highlights" data-i18n-attr="aria-label:trust.label">
@@ -321,7 +332,7 @@
 
     <!-- NEWSLETTER -->
     <section class="newsletter-section" id="newsletter">
-      <p class="eyebrow" data-i18n="news.eyebrow">A NOTE FROM ORIANTAL PERFUMES</p>
+      <p class="eyebrow" data-i18n="news.eyebrow">A NOTE FROM ELZEMITY</p>
       <h2 data-i18n-html="news.title">Good things <em>linger.</em></h2>
       <p data-i18n="news.text">Get updates on new arrivals and thoughtfully selected scents.</p>
       <form id="newsletterForm" class="newsletter-form">
@@ -336,7 +347,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div>
-        <a class="brand footer-brand" href="#/" aria-label="Oriantal Perfumes"><img class="brand-logo" src="img/logo-light.svg" alt="Oriantal Perfumes" width="84" height="94" loading="lazy" decoding="async"></a>
+        <a class="brand footer-brand" href="#/" aria-label="Elzemity"><img class="brand-logo" src="img/elzemity-brown.png" alt="Elzemity" width="84" height="94" loading="lazy" decoding="async"></a>
         <p data-i18n="footer.tagline">Find the fragrance that feels like you.</p>
       </div>
 

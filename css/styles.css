@@ -142,3 +142,87 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .payment-choice input{width:18px;height:18px;flex:none;margin-top:4px;accent-color:#8a6c3d}
 @media(max-width:768px){.checkout-dialog{max-width:calc(100vw - 20px);width:calc(100vw - 20px);max-height:calc(100dvh - 20px);overflow:auto}.form-grid{grid-template-columns:minmax(0,1fr)}.form-grid>*{min-width:0}.cart-drawer{max-width:100vw}.floating-whatsapp:not([hidden]){width:50px;height:50px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.floating-whatsapp img{width:29px;height:29px}}
 @media(max-width:420px){.checkout-content{padding-inline:16px}.payment-choice{padding:10px}.payment-choice label{font-size:13px}body{overflow-wrap:break-word}}
+
+
+/* Full-width home video background — scoped to the home hero only. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: clamp(560px, 78vh, 850px);
+  background: #171511;
+  overflow: hidden;
+}
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-background .hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(12, 11, 10, .77), rgba(12, 11, 10, .42) 57%, rgba(12, 11, 10, .12));
+  pointer-events: none;
+}
+.hero .hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 780px);
+  min-height: inherit;
+  padding: clamp(65px, 9vw, 120px) max(6vw, calc((100vw - var(--container)) / 2));
+}
+.hero .hero-copy .eyebrow,
+.hero .hero-copy h1,
+.hero .hero-copy h1 em,
+.hero .hero-copy .hero-description,
+.hero .hero-copy .hero-note {
+  color: #fff;
+}
+.hero .hero-copy .hero-description,
+.hero .hero-copy .hero-note { color: rgba(255,255,255,.9); }
+.hero .hero-copy .small-rule { background: #e4c58b; }
+.hero .hero-copy .button-dark { background: #fff; color: #171511; }
+.hero .hero-copy .button-dark:hover { background: #eadcc7; }
+html[dir="rtl"] .hero::before {
+  background: linear-gradient(270deg, rgba(12, 11, 10, .77), rgba(12, 11, 10, .42) 57%, rgba(12, 11, 10, .12));
+}
+html[dir="rtl"] .hero .hero-copy {
+  padding: clamp(65px, 9vw, 120px) max(6vw, calc((100vw - var(--container)) / 2));
+}
+@media (max-width: 650px) {
+  .hero { min-height: clamp(510px, 78svh, 750px); }
+  .hero .hero-copy, html[dir="rtl"] .hero .hero-copy {
+    width: 100%;
+    min-height: inherit;
+    padding: 70px 24px;
+  }
+  .hero h1, html[dir="rtl"] .hero h1 { font-size: clamp(38px, 10vw, 53px); }
+  .hero::before, html[dir="rtl"] .hero::before {
+    background: linear-gradient(180deg, rgba(12,11,10,.64), rgba(12,11,10,.54) 65%, rgba(12,11,10,.28));
+  }
+}
+
+/* 2026-10-30: account outline and cart counter over bag, no adjacent dot */
+.site-header .account-icon-button{display:inline-flex;align-items:center;justify-content:center;background:none;border:0;padding:5px;color:#111;cursor:pointer}
+.site-header .account-icon-button svg{width:23px;height:23px;display:block}
+.site-header .cart-trigger{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0;padding:8px;overflow:visible}
+.site-header .cart-trigger .cart-badge{position:absolute;top:-3px;right:-5px;left:auto;margin:0;min-width:16px;width:auto;height:16px;padding:0 3px;background:#278c51;color:#fff;font-size:10px;line-height:1;border-radius:999px;z-index:1}
+@media(max-width:650px){.site-header .account-icon-button{display:inline-flex}.site-header .cart-trigger .cart-badge{top:-4px;right:-5px}}
